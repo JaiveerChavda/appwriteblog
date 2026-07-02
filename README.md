@@ -15,7 +15,7 @@ This project is designed to run locally for development and also deploy cleanly 
 
 ## Live Demo
 
-Check it out here: [appwrite-blog](https://appwriteblog-delta-inky.vercel.app/`)
+Check it out here: [appwrite-blog](https://appwriteblog-mrjaiveer.vercel.app)
 
 `https://appwriteblog-delta-inky.vercel.app/`
 
