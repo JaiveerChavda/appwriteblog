@@ -16,6 +16,7 @@ export default function Post() {
 
     useEffect(() => {
         if (slug) {
+
             appwriteService.getPost(slug).then((post) => {
                 if (post) setPost(post);
                 else navigate("/");
@@ -24,12 +25,16 @@ export default function Post() {
     }, [slug, navigate]);
 
     const deletePost = () => {
-        appwriteService.deletePost(post.$id).then((status) => {
-            if (status) {
-                appwriteService.deleteFile(post.featuredImage);
-                navigate("/");
-            }
-        });
+        const deleteIt = window.confirm("Are you sure you want to delete this post?");
+
+        if (deleteIt) {
+            appwriteService.deletePost(post.$id).then((status) => {
+                if (status) {
+                    appwriteService.deleteFile(post.featuredImage);
+                    navigate("/");
+                }
+            });
+        }
     };
 
     return post ? (
@@ -37,19 +42,19 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFileView(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
                     />
 
                     {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                        <div className="absolute right-6 top-6 space-x-3">
+                            <Link to={`/edit-post/${post.$id}`} >
+                                <Button bgColor="bg-green-500" className="cursor-pointer">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                            <Button bgColor="bg-red-500" onClick={deletePost} className="cursor-pointer">
                                 Delete
                             </Button>
                         </div>
