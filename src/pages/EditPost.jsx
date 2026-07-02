@@ -7,7 +7,7 @@ function EditPost() {
 
     const [post,setPost] = useState(null)
     const navigate = useNavigate()
-    const slug = useParams()
+    const {slug} = useParams()
 
     useEffect(() => {
         if(slug){
